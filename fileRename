@@ -1,0 +1,20 @@
+#!/bin/bash
+echo "hello world"
+dir="img2017"              # Remove all dots.
+
+for f in *.jpg                 # no need to use ls.
+do
+    filename=${f##*/}          # Use the last part of a path.
+    extension=${f##*.}         # Remove up to the last dot.
+    filename=${filename%.*}    # Remove from the last dot.
+    echo "$filename $dir"
+	
+	newFileName=${filename:12}
+	newFileName=${newFileName#"${newFileName%%[!0]*}"}
+	echo $newFileName
+
+	if [[ $filename ==  4595189_* ]]; then     # If the directory exists
+		mv "$filename.$extension" "$newFileName.$extension" # Move file there.
+	fi
+
+done

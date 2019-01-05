@@ -1,0 +1,20 @@
+#!/bin/bash
+echo "hello world"
+dir=“nameModified”              # Remove all dots.
+count=1
+for f in *.jpg                 # no need to use ls.
+do
+    filename=${f##*/}          # Use the last part of a path.
+    extension=${f##*.}         # Remove up to the last dot.
+    filename=${filename%.*}    # Remove from the last dot.
+    echo "$filename $dir"
+	
+	newFileName=$count
+	echo $newFileName
+
+	if [[ $extension == "jpg" ]]; then     # If the directory exists
+		mv "$filename.$extension" "$newFileName.$extension" # Move file there.
+	fi
+    let count=count+1
+
+done
