@@ -1,8 +1,14 @@
 #!/bin/bash
 
-echo "hello world"
 
-dir="img2018"              # Remove all dots.
+
+dir="imageOut"              # Remove all dots.
+
+if [[ $# -gt 0 ]] ; then
+	dir=$1
+fi
+
+mkdir $dir   #create Dir from user input
 
 for f in *.jpg                 # no need to use ls.
 do
@@ -22,7 +28,9 @@ do
 		if [[ $((10#$img_time)) -gt 1800 ]] ; then
 			echo "Friday Carnite image"
 			if [[ -d $dir ]]; then     # If the directory exists
-				mv "$filename.$extension" "$dir"/ # Move file there.
+					newFileName=${filename:12} #remove everything before the 12th charactor
+					newFileName=${newFileName#0*} #remove leading zeros
+				mv "$filename.$extension" "$dir"/"$newFileName.$extension" # Move file here and rename to date ($?->return from function)
 			fi
 		fi
 	elif [[ $test_date -eq 6 ]]; then
@@ -30,7 +38,9 @@ do
 		if [[ $((10#$img_time)) -lt 300 ]] ; then
 			echo "Saturday CarMorning image"
 			if [[ -d $dir ]]; then     # If the directory exists
-				mv "$filename.$extension" "$dir"/ # Move file there.
+					newFileName=${filename:12} #remove everything before the 12th charactor
+					newFileName=${newFileName#0*} #remove leading zeros
+				mv "$filename.$extension" "$dir"/"$newFileName.$extension" # Move file here and rename to date ($?->return from function)
 			fi
 		fi
 	else
@@ -38,3 +48,7 @@ do
 	fi
 
 done
+
+
+
+
