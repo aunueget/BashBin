@@ -10,12 +10,11 @@ do
     echo "$filename $dir"
 	
 	newFileName=${filename:12} #remove everything before the 12th charactor
-	echo $newFileName
-	newFileName=${newFileName#"${newFileName%%[!0]*}"}  
+	newFileName=${newFileName#0*} #remove leading zeros
 	echo $newFileName
 
-	if [[ $filename ==  [0-9]+_* ]]; then     # If the directory exists
-		mv "$filename.$extension" "$newFileName.$extension" # Move file there.
+	if [[ $filename =~  [0-9]+_* ]]; then     # if its a cam image
+		mv "$filename.$extension" "$newFileName.$extension" # remove leading numbers leaving only date
 	fi
 
 done

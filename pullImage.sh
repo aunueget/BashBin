@@ -2,7 +2,7 @@
 
 echo "hello world"
 
-dir="img2017"              # Remove all dots.
+dir="img2018"              # Remove all dots.
 
 for f in *.jpg                 # no need to use ls.
 do
